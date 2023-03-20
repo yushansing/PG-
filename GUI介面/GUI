@@ -1,0 +1,63 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+
+class MyForm(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+    # 整體螢幕背景
+        self.setWindowTitle('oxxo.studio')       #設定標題。 
+        self.resize(600,400)                     #設定開啟視窗時的長寬。
+        self.setStyleSheet('background: #0B1746')           #背景顏色
+        #Form.setStyleSheet('background: url("bg.img");')   #背景圖片        
+
+    # 設定第一個多行輸入框1
+        self.input_list = QtWidgets.QTextEdit(self)         
+        self.input_list.setGeometry(30, 100, 150, 200)
+        self.input_list.setStyleSheet('font-size:30px; color:#0B1746; background:#FFFFFF')
+        self.input_list.cursorPositionChanged.connect(self.on_input_list_changed)
+            
+    # 設定第二個多行輸出框2
+        self.output_list = QtWidgets.QPlainTextEdit(self)
+        self.output_list.setGeometry(200, 100, 150, 200)
+        self.output_list.setStyleSheet('font-size:30px; color:#0B1746; background:#FFFFFF')
+        
+
+    # 設定列表选择框 
+        self.listwidget = QtWidgets.QListWidget(self)  # 建立列表選擇框元件
+        self.listwidget.addItems(['a','b','c'])  # 建立選單內容
+        self.listwidget.setGeometry(450, 300, 120, 200)  # 設定位置和大小
+        self.listwidget.currentItemChanged.connect(self.load_output_list_3) #列表選擇框的改變進行連結別的事件
+
+
+    # 設定儲存按鈕
+        self.save_button = QtWidgets.QPushButton('Save', self)
+        self.save_button.setGeometry(250, 550, 120, 50)
+        self.save_button.clicked.connect(self.on_save_button_clicked)
+ 
+ 
+
+    # 設定第三個多行輸出框3 
+        self.output_list_3 = QtWidgets.QPlainTextEdit(self)
+        self.output_list_3.setGeometry(800, 100, 150, 200)
+        self.output_list_3.setStyleSheet('font-size:30px; color:#0B1746; background:#FFFFFF')
+                
+
+
+    # 當多行輸入框中1的內容改變時，將新內容顯示在多行輸出框中2
+    def on_input_list_changed(self):
+        self.output_list.setPlainText(self.input_list.toPlainText())#多行輸入框2 取得多行輸入框1的資料
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication([])
+    window = MyForm()
+    window.show()
+    app.exec_()
