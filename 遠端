@@ -1,0 +1,15 @@
+import paramiko
+class remote():
+    def re():
+        ssh=paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect("192.168.4.1", username="root", port=22, password="000")
+        ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("ls /etc ")
+        print(ssh_stdout.read())
+        ssh.close()
+
+if __name__ == "__main__":
+    remotefar=remote.re()
+    remotefar      
+
+
