@@ -1,0 +1,74 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QTextEdit, QVBoxLayout, QPushButton, QHBoxLayout, QSpacerItem, QSizePolicy
+from PyQt5 import QtWidgets ,QtWidgets, QtGui, QtCore
+import subprocess
+import remoter 
+
+
+#白色#FFFFFF 象牙黑#292421 深藍色#0B1746
+# QWidget就是一個視窗的意思
+
+app = QtWidgets.QApplication(sys.argv)   # 視窗程式開始
+Form = QtWidgets.QWidget()               #視窗
+Form.setWindowTitle('oxxo.studio')       #設定標題。 
+Form.resize(600,400)                     #設定開啟視窗時的長寬。
+
+#背景顏色             #使用網頁 CSS 樣式設定樣式 ( 不支援 CSS3 語法 )
+Form.setStyleSheet('background: #0B1746')           #背景顏色
+#Form.setStyleSheet('background: url("bg.img");')   #背景圖片
+
+ 
+
+#設定多行輸入框4,如何取得資料
+# QWidget相當於就是一個視窗的意思
+# 創建 GUI 元素
+window = QWidget(Form)
+window.setGeometry(600, 30, 500, 300)
+window.setStyleSheet('font-size:30px; color:#0B1746; background:#FFFFFF')
+#設計文本跟按鈕
+text_edit = QTextEdit(Form)
+#btn_run_script = QPushButton(Form)  # 這this
+
+    # 創建佈局
+hbox = QHBoxLayout(Form)  
+hbox.addWidget(text_edit)
+#hbox.addWidget(btn_run_script)  # 這this
+
+    # 設置佈局
+window.setLayout(hbox)
+
+    # 連接按鈕事件
+def run_script():
+    # 調用 Python 自動化腳本
+    result = subprocess.check_output(["python", "remoter.py"])
+    # 將結果顯示在文本編輯框中
+    text_edit.setText(str(result))
+
+#設定按鈕4
+#跑程式碼
+btn_run_script = QPushButton(Form)
+btn_run_script.setGeometry(800,400,100,40)
+btn_run_script.clicked.connect(run_script)
+btn_run_script.setText('點擊')          #按鈕內容
+btn_run_script.setStyleSheet('''     
+QPushButton {  
+    background:#C0C0C0;  
+    color:#808069;   
+    font-size:20px;
+    border:2px solid #000;
+    }
+  QPushButton:hover {
+        color: #ff0;
+        background: #f00;
+    }
+''')
+
+
+
+
+
+
+
+#這兩個一定要放最後面
+Form.show()             # 顯示視窗
+sys.exit(app.exec_())   # 視窗程式結束
