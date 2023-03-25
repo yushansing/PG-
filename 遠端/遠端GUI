@@ -38,7 +38,7 @@ window.setLayout(hbox)
     # 連接按鈕事件
 def run_script():
     result = subprocess.check_output(["python", "remoter.py"])
-    text_edit.setText(str(result))
+    text_edit.text(str(result))
 
 #設定按鈕4
 #跑程式碼
