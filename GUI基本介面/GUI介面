@@ -16,7 +16,7 @@ class MyForm(QtWidgets.QMainWindow):
         self.input_list = QtWidgets.QTextEdit(self)         
         self.input_list.setGeometry(30, 100, 150, 200)
         self.input_list.setStyleSheet('font-size:30px; color:#0B1746; background:#FFFFFF')
-        self.input_list.cursorPositionChanged.connect(self.on_input_list_changed)
+        self.input_list.cursorPositionChanged(self.on_input_list_changed)
             
     # 設定第二個多行輸出框2
         self.output_list = QtWidgets.QPlainTextEdit(self)
@@ -28,13 +28,13 @@ class MyForm(QtWidgets.QMainWindow):
         self.listwidget = QtWidgets.QListWidget(self)  
         self.listwidget.addItems(['a','b','c']) 
         self.listwidget.setGeometry(450, 300, 120, 200)  
-        self.listwidget.currentItemChanged.connect(self.load_output_list_3)
+        self.listwidget.currentItemChanged(self.load_output_list_3)
 
 
     # 設定儲存按鈕
         self.save_button = QtWidgets.QPushButton('Save', self)
         self.save_button.setGeometry(250, 550, 120, 50)
-        self.save_button.clicked.connect(self.on_save_button_clicked)
+        self.save_button.clicked(self.on_save_button_clicked)
  
  
 
@@ -47,7 +47,7 @@ class MyForm(QtWidgets.QMainWindow):
 
     # 當多行輸入框中1的內容改變時，將新內容顯示在多行輸出框中2
     def on_input_list_changed(self):
-        self.output_list.setPlainText(self.input_list.toPlainText())
+        self.output_list.setPlain(self.input_list.toPlainText())
 
 
 
