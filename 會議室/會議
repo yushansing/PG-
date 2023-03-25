@@ -22,7 +22,7 @@ class MyForm(QtWidgets.QMainWindow):
     
     # 設定第一個單行輸出框0, name
         self.output_list_sigal_0 =  QtWidgets.QLineEdit(self)
-        self.output_list_sigal_0.setGeometry(160, 20,200, 50)      #右下  寬長    
+        self.output_list_sigal_0.setGeometry(160, 20,200, 50)     
 
     # 設定第一個單行輸出框1, mail
         self.output_list_sigal_1 =  QtWidgets.QLineEdit(self)
