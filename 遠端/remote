@@ -9,7 +9,7 @@ class remote():
         ssh.close()
 
 if __name__ == "__main__":
-    remotefar=remote.re()
-    remotefar      
+    remote_far=remote.re()
+    remote_far      
 
 
