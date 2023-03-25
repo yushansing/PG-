@@ -28,7 +28,7 @@ class MyForm(QtWidgets.QMainWindow):
         self.listwidget = QtWidgets.QListWidget(self)  # 建立列表選擇框元件
         self.listwidget.addItems(['a','b','c'])  # 建立選單內容
         self.listwidget.setGeometry(450, 300, 120, 200)  # 設定位置和大小
-        self.listwidget.currentItemChanged.connect(self.load_output_list_3) #列表選擇框的改變進行連結別的事件
+        self.listwidget.currentItemChanged.connect(self.load_output_list_3)
 
 
     # 設定儲存按鈕
@@ -47,7 +47,7 @@ class MyForm(QtWidgets.QMainWindow):
 
     # 當多行輸入框中1的內容改變時，將新內容顯示在多行輸出框中2
     def on_input_list_changed(self):
-        self.output_list.setPlainText(self.input_list.toPlainText())#多行輸入框2 取得多行輸入框1的資料
+        self.output_list.setPlainText(self.input_list.toPlainText())
 
 
 
