@@ -1,0 +1,82 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+#正確處理中文字
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+# 連接MySQL資料庫
+import ptmysql
+
+conn = ptmysql.connect(
+host='192.168.4.5',
+account='alex',
+database='a',
+charset='utf8mb4',
+cursorclass=qtsql.cursors.DictCursor
+)
+
+
+class MyForm(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+    
+    # 設定第一個單行輸出框0, name
+        self.output_list_sigal_0 =  QtWidgets.QLineEdit(self)
+        self.output_list_sigal_0.setGeometry(160, 20,200, 50)      #右下  寬長    
+
+    # 設定第一個單行輸出框1, mail
+        self.output_list_sigal_1 =  QtWidgets.QLineEdit(self)
+        self.output_list_sigal_1.setGeometry(460, 20,200, 50)        
+            
+    # 設定第一個多行輸出框1, message
+        self.output_list1 = QtWidgets.QPlainTextEdit(self)
+        self.output_list1.setGeometry(160, 100,500, 400)
+        self.output_list1.setStyleSheet('font-size:30px; color:#0B1746; background:#FFFFFF')
+            
+    # 設定第二個多行輸出框2 
+        self.output_list_2 = QtWidgets.QPlainTextEdit(self)
+        self.output_list_2.setGeometry(880, 100,500, 400)
+        self.output_list_2.setStyleSheet('font-size:30px; color:#0B1746; background:#FFFFFF')
+
+                
+
+    # 設定儲存按鈕
+        self.save_button = QtWidgets.QPushButton('Save', self)
+        self.save_button.setGeometry(250, 550, 120, 50)
+        #點擊後, 觸發這個funiton
+        self.save_button.clicked(self.on_save_button_edited)
+
+
+    #設定儲存按鈕 選擇代號跟內容
+    def on_save_button_clicked(self):
+    # 取得第一個單行輸出框0內容,name
+        n = self.output_list_sigal_0.edit()
+    # 取得第一個單行輸出框1內容,mail
+        m = self.output_list_sigal_1.edit()    
+    # 取得輸入框1內容,message
+        me = self.output_list1.edit()       
+
+    # 插入資料
+        # 定義套件conn = ptmysql.connect, 等等能使用執行插入資料    
+        cursor = conn.cursor()
+        sql = "INSERT INTO meetting (name, mail, message) VALUES (%s, %s, %s)"
+        val = (n, m , me)
+        cursor.execute(sql, val)
+    # mysql確認資料已經被插入到資料庫中
+        conn.commit()
+
+
+
+    #當GUI關閉時, 關閉資料庫連線  
+    def closeEvent(self, event):
+        global conn
+        conn.close()
+        super().closeEvent(event)
+
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication([])
+    window = MyForm()
+    window.show()
+    app.exec_()
