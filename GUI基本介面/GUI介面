@@ -7,10 +7,10 @@ class MyForm(QtWidgets.QMainWindow):
         super().__init__()
 
     # 整體螢幕背景
-        self.setWindowTitle('oxxo.studio')       #設定標題。 
-        self.resize(600,400)                     #設定開啟視窗時的長寬。
-        self.setStyleSheet('background: #0B1746')           #背景顏色
-        #Form.setStyleSheet('background: url("bg.img");')   #背景圖片        
+        self.setWindowTitle('oxxo.studio')       
+        self.resize(600,400)                     
+        self.setStyleSheet('background: #0B1746')           
+        #Form.setStyleSheet('background: url("bg.img");')        
 
     # 設定第一個多行輸入框1
         self.input_list = QtWidgets.QTextEdit(self)         
@@ -25,9 +25,9 @@ class MyForm(QtWidgets.QMainWindow):
         
 
     # 設定列表选择框 
-        self.listwidget = QtWidgets.QListWidget(self)  # 建立列表選擇框元件
-        self.listwidget.addItems(['a','b','c'])  # 建立選單內容
-        self.listwidget.setGeometry(450, 300, 120, 200)  # 設定位置和大小
+        self.listwidget = QtWidgets.QListWidget(self)  
+        self.listwidget.addItems(['a','b','c']) 
+        self.listwidget.setGeometry(450, 300, 120, 200)  
         self.listwidget.currentItemChanged.connect(self.load_output_list_3)
 
 
